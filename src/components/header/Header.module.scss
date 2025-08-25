@@ -1,0 +1,28 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 1.6rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #404040;
+    .header__title{
+      color: #fff;
+      font-size: 30px;
+    }
+    .header__auth{
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      border: 1px solid #404040;
+      padding: 1rem;
+      border-radius: 4px;
+      .auth__item{
+        color: blueviolet;
+      }
+    }
+  }
