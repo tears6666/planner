@@ -17,9 +17,11 @@ export default function SideBar() {
 								<ClipboardList className={styles.item} /> Board
 							</li>
 						</Link>
-						<li className={styles.list__item}>
-							<Timer className={styles.item} /> Pomodoro
-						</li>
+						<Link to='/pomodoro'>
+							<li className={styles.list__item}>
+								<Timer className={styles.item} /> Pomodoro
+							</li>
+						</Link>
 						<li className={styles.list__item}>
 							<Settings className={styles.item} /> Settings
 						</li>

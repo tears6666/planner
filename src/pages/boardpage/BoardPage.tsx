@@ -1,9 +1,9 @@
 import { Header } from '../../components/header/Header'
-import styles from './Board.module.scss'
+import styles from './BoardPage.module.scss'
 
-export default function Board(){
+export default function BoardPage(){
   return(
-    <div className={styles.board}>
+    <div className={styles.boardpage}>
       <Header />
       <section className={styles.board__canban}></section>
     </div>
