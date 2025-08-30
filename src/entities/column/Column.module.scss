@@ -1,0 +1,12 @@
+.column{
+  margin-top: 40px;
+  border: 1px solid #898989;
+  width: 200px;
+  padding: 2rem;
+  border-radius: 5px;
+  .column__title{
+    color: #fff;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #898989;
+  }
+}

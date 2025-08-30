@@ -1,4 +1,9 @@
 .boardpage{
   width: 80%;
   padding: 4rem;
+  .board__canban{
+    margin-top: 10rem;
+    display: flex;
+    justify-content: space-evenly;
+  }
 }
