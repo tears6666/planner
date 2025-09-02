@@ -14,7 +14,7 @@ export default function SideBar() {
 					<ul className={styles.nav__list}>
 						<Link to='/board'>
 							<li className={styles.list__item}>
-								<ClipboardList className={styles.item} /> Board
+								<ClipboardList className={styles.item} /> Tasks
 							</li>
 						</Link>
 						<Link to='/pomodoro'>

@@ -1,0 +1,39 @@
+.canban{
+  margin-top: 5rem;
+  .canban__board{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 8rem;
+    .board__columns{
+      gap: 30px;
+      display: flex;
+      justify-content: center;
+    }
+    .board__add{
+      position: absolute;
+      top: 75px;
+      right: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all .3s ease;
+      .plus{
+        transition: all .3s ease;
+      }
+    }
+    .board__add:hover{
+      .plus{
+        color: blueviolet;
+      }
+    }
+  }
+}
