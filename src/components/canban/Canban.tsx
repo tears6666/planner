@@ -6,12 +6,14 @@ import {
 import { arrayMove, SortableContext } from '@dnd-kit/sortable'
 import { CirclePlus } from 'lucide-react'
 import { useMemo, useState } from 'react'
+import type { Column, Id, Task } from '../../app/@types/types'
 import { Columns } from '../../entites/column/Columns'
 import styles from './Canban.module.scss'
-import type { Column, Id } from './types'
 
 export default function Canban() {
 	const [columns, setColumns] = useState<Column[]>([])
+	const [tasks, setTasks] = useState<Task[]>([])
+
 	const columnsId = useMemo(() => columns.map(column => column.id), [columns])
 	const createNewColumn = () => {
 		const columnToAdd: Column = {
@@ -34,6 +36,10 @@ export default function Canban() {
 			setActiveColumn(event.active.data.current.column)
 			return
 		}
+	}
+	function deleteTask(id: Id) {
+		const newTasks = tasks.filter(task => task.id !== id)
+		setTasks(newTasks)
 	}
 	function onDragEnd(event: DragEndEvent) {
 		const { active, over } = event
@@ -62,6 +68,21 @@ export default function Canban() {
 		})
 		setColumns(newColumns)
 	}
+	function updateTask(id: Id, content: string) {
+		const newTasks = tasks.map(task => {
+			if (task.id !== id) return task
+			return { ...task, content }
+		})
+		setTasks(newTasks)
+	}
+	function createTask(columnId: Id) {
+		const newTask: Task = {
+			id: generateId(),
+			columnId,
+			content: `Task ${columns.length + 1}`,
+		}
+		setTasks([...tasks, newTask])
+	}
 	return (
 		<div className={styles.canban}>
 			<div className={styles.canban__board}>
@@ -74,6 +95,10 @@ export default function Canban() {
 									key={column.id}
 									column={column}
 									deleteColumn={deleteColumn}
+									createTask={createTask}
+									tasks={tasks.filter(task => task.columnId === column.id)}
+									deleteTask={deleteTask}
+									updateTask={updateTask}
 								/>
 							))}
 						</SortableContext>

@@ -5,11 +5,13 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
     gap: 8rem;
     .board__columns{
       gap: 30px;
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
     }
     .board__add{
       position: absolute;

@@ -10,6 +10,7 @@ export default function SideBar() {
 					<ListChecks className={styles.title__item} />
 					React Planner
 				</h1>
+				<p className={styles.beta}>beta</p>
 				<nav className={styles.top__nav}>
 					<ul className={styles.nav__list}>
 						<Link to='/board'>
