@@ -1,0 +1,35 @@
+.timeBlocker {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	.timeBlocker__title {
+		color: #fff;
+		font-size: 50px;
+	}
+	h2 {
+		color: #ccc;
+	}
+	.timeBlocker__timer {
+		font-size: 200px;
+		color: #fff;
+	}
+	.timeBlocker__btns {
+		display: flex;
+		gap: 20px;
+		.btn {
+			width: 200px;
+			height: 60px;
+			border-radius: 5px;
+			cursor: pointer;
+			background: none;
+			border: 1px solid #3a3b3a;
+			color: #ccc;
+			font-size: 20px;
+			transition: all 0.3s ease;
+		}
+		.btn:hover {
+			background-color: blueviolet;
+			border: none;
+		}
+	}
+}

@@ -1,6 +1,7 @@
 import {
 	DndContext,
 	type DragEndEvent,
+	type DragOverEvent,
 	type DragStartEvent,
 } from '@dnd-kit/core'
 import { arrayMove, SortableContext } from '@dnd-kit/sortable'
@@ -23,7 +24,7 @@ export default function Canban() {
 		setColumns([...columns, columnToAdd])
 	}
 	const [activeColumn, setActiveColumn] = useState<Column | null>(null)
-
+	const [activeTask, setActiveTask] = useState<Task | null>(null)
 	function generateId() {
 		return Math.floor(Math.random() * 10001)
 	}
@@ -34,6 +35,10 @@ export default function Canban() {
 	function onDragStart(event: DragStartEvent) {
 		if (event.active.data.current?.type === 'Column') {
 			setActiveColumn(event.active.data.current.column)
+			return
+		}
+		if (event.active.data.current?.type === 'Task') {
+			setActiveTask(event.active.data.current.task)
 			return
 		}
 	}
@@ -68,6 +73,27 @@ export default function Canban() {
 		})
 		setColumns(newColumns)
 	}
+	function onDragOver(event: DragOverEvent) {
+		const { active, over } = event
+		if (!over) return
+
+		const activeId = active.id
+		const overId = over.id
+
+		if (activeId === overId) return
+
+		const isActiveATask = active.data.current?.type === 'Task'
+		const isOverATask = over.data.current?.type === 'Task'
+
+		if (isActiveATask && isOverATask) {
+			setTasks(tasks => {
+				const activeIndex = tasks.findIndex(task => task.id === activeId)
+				const overIndex = tasks.findIndex(task => task.id === overId)
+				tasks[activeIndex].columnId = tasks[overIndex].columnId
+				return arrayMove(tasks, activeIndex, overIndex)
+			})
+		}
+	}
 	function updateTask(id: Id, content: string) {
 		const newTasks = tasks.map(task => {
 			if (task.id !== id) return task
@@ -86,7 +112,11 @@ export default function Canban() {
 	return (
 		<div className={styles.canban}>
 			<div className={styles.canban__board}>
-				<DndContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+				<DndContext
+					onDragStart={onDragStart}
+					onDragEnd={onDragEnd}
+					onDragOver={onDragOver}
+				>
 					<div className={styles.board__columns}>
 						<SortableContext items={columnsId}>
 							{columns.map(column => (

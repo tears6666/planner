@@ -1,4 +1,4 @@
-import { ClipboardList, ListChecks, Settings, Timer } from 'lucide-react'
+import { ClipboardList, ListChecks, Timer } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import styles from './SideBar.module.scss'
 
@@ -23,9 +23,6 @@ export default function SideBar() {
 								<Timer className={styles.item} /> Pomodoro
 							</li>
 						</Link>
-						<li className={styles.list__item}>
-							<Settings className={styles.item} /> Settings
-						</li>
 					</ul>
 				</nav>
 			</div>

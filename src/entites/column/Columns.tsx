@@ -1,7 +1,7 @@
-import { useSortable } from '@dnd-kit/sortable'
+import { SortableContext, useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { Grip, Trash2 } from 'lucide-react'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import type { IProps } from '../../app/@types/types'
 import { Task } from '../task/Task'
 import styles from './Columns.module.scss'
@@ -29,6 +29,9 @@ export const Columns = (props: IProps) => {
 		transition,
 		transform: CSS.Transform.toString(transform),
 	}
+	const tasksIds = useMemo(() => {
+		return tasks.map(task => task.id)
+	}, [tasks])
 	return (
 		<div ref={setNodeRef} style={style} className={styles.columns}>
 			<div className={styles.columns__top}>
@@ -65,14 +68,16 @@ export const Columns = (props: IProps) => {
 				</div>
 			</div>
 			<div className={styles.columns__content}>
-				{tasks.map(task => (
-					<Task
-						updateTask={updateTask}
-						key={task.id}
-						task={task}
-						deleteTask={deleteTask}
-					/>
-				))}
+				<SortableContext items={tasksIds}>
+					{tasks.map(task => (
+						<Task
+							updateTask={updateTask}
+							key={task.id}
+							task={task}
+							deleteTask={deleteTask}
+						/>
+					))}
+				</SortableContext>
 			</div>
 			<div className={styles.columns__footer}>
 				<Grip className={styles.footer__grab} {...attributes} {...listeners} />
