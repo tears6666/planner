@@ -89,7 +89,6 @@ export default function Canban() {
 			setTasks(tasks => {
 				const activeIndex = tasks.findIndex(task => task.id === activeId)
 				const overIndex = tasks.findIndex(task => task.id === overId)
-				tasks[activeIndex].columnId = tasks[overIndex].columnId
 				return arrayMove(tasks, activeIndex, overIndex)
 			})
 		}
